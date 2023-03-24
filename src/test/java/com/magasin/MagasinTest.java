@@ -52,5 +52,4 @@ class MagasinTest {
             assertEquals(expected[i], app.items[i].quality);
         }
     }
-
 }
