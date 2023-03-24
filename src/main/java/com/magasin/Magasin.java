@@ -8,54 +8,98 @@ class Magasin {
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals("Comté") && !items[i].name.equals("Pass VIP Concert")) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Kryptonite")) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
+            for (int i = 0; i < items.length; i++){
+                update(items[i]);
+            }
+    }
 
-                    if (items[i].name.equals("Pass VIP Concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
+    public void update(Item item){
+        switch (item.name){
+            case "Comté":
+                updateCompt(item);
+                break;
+            case "Pass VIP Concert":
+                updatePassVIPConcert(item);
+                break;
+            case "Pouvoirs magiques":
+                updatePouvoirMagiques(item);
+                break;
+            case "Kryptonite":
+                updateKryptonite(item);
+                break;
+            default:
+                updateProduct(item);
+                break;
+        }
+    }
+    public void updateCompt(Item item){
+        if (item.quality < 50) {
+            item.quality = item.quality + 1;
+            if(item.sellIn <= 0){
+                item.quality = item.quality + 1;
+            }
+        }
+//        if (item.quality > 50){
+//            item.quality = 50;
+//        } else if (item.quality < 0) {
+//            item.quality = 0;
+//        }
+        item.sellIn = item.sellIn - 1;
+    }
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
+    public void updatePassVIPConcert(Item item){
+        if (item.quality < 50) {
+            item.quality = item.quality + 1;
+            if (item.sellIn < 11) {
+                if (item.quality < 50) {
+                    item.quality = item.quality + 1;
                 }
             }
-
-            if (!items[i].name.equals("Kryptonite")) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
-
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Comté")) {
-                    if (!items[i].name.equals("Pass VIP Concert")) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Kryptonite")) {
-                                items[i].quality = items[i].quality - 1;
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
-                    }
-                } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
-                    }
+            if (item.sellIn < 6) {
+                if (item.quality < 50) {
+                    item.quality = item.quality + 1;
                 }
             }
         }
+        item.sellIn = item.sellIn - 1;
+        if(item.sellIn < 0){
+            item.quality = 0;
+        }
+
+//        if(item.sellIn <= 0){
+//            item.quality = 0;
+//        }
+//        if (item.quality > 50){
+//            item.quality = 50;
+//        } else if (item.quality < 0) {
+//            item.quality = 0;
+//        }
+        item.sellIn = item.sellIn - 1;
     }
+
+    public void updateKryptonite(Item item){
+//        item.quality = 80;
+    }
+
+    public void updateProduct(Item item){
+        item.quality = item.quality - 1;
+        item.sellIn = item.sellIn - 1;
+        if(item.sellIn < 0 && item.quality > 0){
+            item.quality = item.quality - 1;
+        }
+        if (item.quality <= 0){
+            item.quality =0 ;
+        }
+//        if (item.quality > 50){
+//            item.quality = 50;
+//        } else if (item.quality < 0) {
+//            item.quality = 0;
+//        }
+    }
+
+    public void updatePouvoirMagiques(Item item){
+        item.quality = item.quality - 2;
+        item.sellIn = item.sellIn - 1;
+    }
+
 }

@@ -2,15 +2,12 @@ package com.magasin;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class MagasinTest {
+class SecureMagazinTest {
 
     @Test
-    void foo() {
-//        https://www.youtube.com/watch?v=VREGsIsMNt0
+    void updateQuality() {
         Item[] items = new Item[] {
                 new Item("Comté", 0, 0),
                 new Item("Comté", 0, 50),
@@ -44,13 +41,12 @@ class MagasinTest {
                 new Item("product", 20, 20),
                 new Item("product", -10, -10),
         };
-        int[] expected = new int[] {2,50,46,46,21,2,-8,0,0,48,47,21,0,0,0,50,45,45,20,0,-10,0,48,44,44,19,0,-10};
-        Magasin app = new Magasin(items);
+        int[] expected = new int[] {2,50,46,46,21,2,-8,0,0,48,47,21,0,0,0,50,45,45,20,0,-10,0,48,44,44,19,-10};
+        SecureMagazin app = new SecureMagazin(items);
         app.updateQuality();
         for (int i = 0; i < items.length; i++) {
             System.out.println(app.items[i]);
             assertEquals(expected[i], app.items[i].quality);
         }
     }
-
 }
