@@ -48,7 +48,7 @@ class MagasinTest {
                 new Item("Pouvoirs magiques", 5, 45),
                 new Item("Pouvoirs magiques", 10, 45),
                 new Item("Pouvoirs magiques", 20, 20),
-                new Item("Pouvoirs magiques", -10, -1)
+                new Item("Pouvoirs magiques", -10, 10)
         };
         int[] expected = new int[] {2,50,46,46,21,2,-8,0,0,48,47,21,0,0,0,50,45,45,20,0,-10,0,48,44,44,19,0,0,46,43,43,18,0};
         Magasin app = new Magasin(items);
